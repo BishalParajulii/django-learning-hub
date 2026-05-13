@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes</title>
+</head>
+<body>
+
+    <h2> Random Jokes Generator</h2>
+
+    <div id="setup">Click the button to get a random joke!</div>
+    <div id="joke"></div>
+
+    <button onclick="getJoke()">Get Joke</button>
+
+    <div>
+        <div>
+            <h2>
+            Want to write a Joke ?
+            </h2>
+        </div>
+        <div>
+            <form id="form">
+                {% csrf_token %}
+                <textarea name="category" id="category" placeholder="Enter category..."></textarea>
+                <textarea name="joke" placeholder="Write your joke here..."></textarea>
+                <button type="submit">Submit Joke</button>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h1>View Your Jokes Here !!!!!!!!!!!!!!</h1>
+         <div id="joke-list">
+         </div>
+    </div>
+
+    <script>
+        function getJoke() {
+            fetch('https://api.chucknorris.io/jokes/random')
+                .then(response => response.json())
+                .then(data => {
+                    
+                    document.getElementById('joke').innerText = data.value;
+                })
+                .catch(error => {
+                    document.getElementById("setup").innerText = "Failed to load joke";
+                    console.log(error);
+                });
+            }
+
+            document.getElementById("form").addEventListener("submit" , async function(e)
+            {
+            e.preventDefault();
+
+            const category = document.getElementById("category").value;
+            const joke = document.querySelector('textarea[name="joke"]').value;
+
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            const response = await fetch('http://127.0.0.1:8000/app/my/jokes/' , {
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'X-CSRFToken' : csrftoken
+                },
+                body : JSON.stringify({
+                    category : category,
+                    joke : joke
+            })
+        })
+        const data = await response.json();
+        console.log(data);
+
+        if (response.ok) {
+            alert("Joke submitted successfully!");
+        } else {
+            alert("Failed to submit joke.");
+        }
+    });
+
+    async function viewYourJokes() {
+            const response = await fetch('http://127.0.0.1:8000/app/my/jokes/');
+            const data = await response.json();
+
+            const container = document.getElementById('joke-list');
+            container.innerHTML = '';
+
+            data.forEach(joke => {
+                container.innerHTML += `
+                <div> 
+                <h4>category : ${joke.category}</h4>
+                <h4>joke : ${joke.joke}</h4>
+                </div> 
+                `;
+            });
+    }
+
+    viewYourJokes();
+
+    </script>
+
+</body>
+</html>
