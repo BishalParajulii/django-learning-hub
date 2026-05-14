@@ -5,6 +5,7 @@ import os
 from django.conf import settings
 
 
+
 def send_email(request):
     
     send_templated_mail(
@@ -14,7 +15,8 @@ def send_email(request):
             context={
                 'username':"bishal",
                 'full_name': "bishal",
-                'signup_date': "bishal"
+                'signup_date': "bishal",
+                'logo': 'logo/logo.png'
             }
     ) 
     return HttpResponse("Email sent successfully")
