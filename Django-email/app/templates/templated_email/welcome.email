@@ -8,7 +8,7 @@ Hi {{ full_name }},
 
 Welcome via email. <br> <br>
 
-<img src="{% static 'app/images/logo.png' %}" alt="welcome image" width="200px">
+<img src="{% static 'logo/logo.png' %}" alt="welcome image" width="200px">
 
 
 Thanks,
