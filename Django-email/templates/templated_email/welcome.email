@@ -17,8 +17,8 @@ You rock!
 
 <p>Welcome via email.</p>
 
-<img src="{% static logo %}" alt="welcome image" width="200px">
+<img src="{% static 'logo/logo.png' %}" alt="welcome image" width="200px">
 
 <p>Thanks,<br>
 You rock!</p>
-{% endblock %}  
+{% endblock %}

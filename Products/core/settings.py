@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-iv2^*ft076uvnz2q^bv$k-&&#exo8vb_hunqtn641f)y@l6qj6'
+SECRET_KEY = 'django-insecure-7(*-7mec4kxejxwkwh)o+(#3blkhj*#3ynb@042_-ax%%$m!w!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,8 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "app",
-    'templated_email'
+    "app"
 ]
 
 MIDDLEWARE = [
@@ -45,7 +44,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,10 +62,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django-project',      # The name you gave it in pgAdmin
+        'USER': 'postgres',           # Your PostgreSQL username (default is 'postgres')
+        'PASSWORD': 'bishal',
+        'HOST': '127.0.0.1',          # Or 'localhost'
+        'PORT': '5432',               # Default PostgreSQL port
     }
 }
 
@@ -105,15 +115,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
-
-#django templated email
-TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
-TEMPLATED_EMAIL_AUTO_PLAIN = False
+STATIC_URL = 'static/'
