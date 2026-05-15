@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+
+    <ul>
+        {% for product in products %}
+            <li>
+
+                <form action="{% url 'save_product' %}" method="post">
+                    {% csrf_token %}
+
+                    <img src="{{ product.thumbnail }}" width="200px" height="200px">
+
+                    <h2>{{ product.title }}</h2>
+                    <p>{{ product.description }}</p>
+
+                    <h3><b>Price : ${{ product.price }}</b></h3>
+                    <h4>category : {{ product.category }}</h4>
+                    <h4>brand : {{ product.brand }}</h4>
+
+                    
+                    <input type="hidden" name="title" value="{{ product.title }}">
+                    <input type="hidden" name="description" value="{{ product.description }}">
+                    <input type="hidden" name="category" value="{{ product.category }}">
+                    <input type="hidden" name="price" value="{{ product.price }}">
+                    <input type="hidden" name="thumbnail" value="{{ product.thumbnail }}">
+                    <input type="hidden" name="brand" value="{{ product.brand }}">
+
+                    <button type="submit">Save</button>
+
+                </form>
+
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
