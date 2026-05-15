@@ -16,7 +16,6 @@ def send_email(request):
                 'username':"bishal",
                 'full_name': "bishal",
                 'signup_date': "bishal",
-                'logo': 'logo/logo.png'
             }
     ) 
     return HttpResponse("Email sent successfully")
@@ -28,6 +27,6 @@ def get_email(request):
         'username':"bishal",
         'full_name': "bishal",
         'signup_date': "bishal",
-        "logo": "logo/logo.png"
+       
     }
     return render(request, "templated_email/welcome.email", context)
