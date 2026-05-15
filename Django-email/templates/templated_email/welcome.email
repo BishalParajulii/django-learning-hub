@@ -1,6 +1,6 @@
 {% load static %}
 {% block subject %} <br>
-My subject for {{ full_name }}
+This is for {{ full_name }}
 {% endblock %} <br> <br>
 
 {% block plain %}
